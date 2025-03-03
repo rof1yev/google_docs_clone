@@ -11,6 +11,8 @@ import TableHeader from "@tiptap/extension-table-header";
 import TableRow from "@tiptap/extension-table-row";
 import Image from "@tiptap/extension-image";
 import ImageResize from "tiptap-extension-resize-image";
+import FontFamily from "@tiptap/extension-font-family";
+import TextStyle from "@tiptap/extension-text-style";
 import Underline from "@tiptap/extension-underline";
 import { useEditorStore } from "@/store/use-editor-store";
 
@@ -42,13 +44,15 @@ export const Editor = () => {
         nested: true,
       }),
       Heading.configure({
-        levels: [1, 2, 3],
+        levels: [1, 2, 3, 4, 5],
       }),
       Table,
       TableCell,
       TableHeader,
       TableRow,
       Underline,
+      FontFamily,
+      TextStyle,
     ],
     content: `
 		<p>Hello World! 🌎️</p>
