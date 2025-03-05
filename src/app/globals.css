@@ -257,4 +257,14 @@ body {
       outline: 3px solid var(--primary);
     }
   }
+
+  /* Link-specific styling */
+  a {
+    @apply text-blue-600;
+    cursor: pointer;
+
+    &:hover {
+      @apply underline;
+    }
+  }
 }
