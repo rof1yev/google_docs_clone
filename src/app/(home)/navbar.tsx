@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { SearchInput } from "./search-input";
+import { UserButton } from "@clerk/nextjs";
 
 export const Navbar = () => {
   return (
@@ -15,7 +16,14 @@ export const Navbar = () => {
       </div>
 
       <SearchInput />
-      
+
+      <UserButton
+        appearance={{
+          elements: {
+            userButtonAvatarBox: "size-[36px]",
+          },
+        }}
+      />
       <div />
     </nav>
   );

@@ -7,12 +7,7 @@ import {
   Authenticated,
   Unauthenticated,
 } from "convex/react";
-import {
-  ClerkProvider,
-  SignInButton,
-  useAuth,
-  SignIn,
-} from "@clerk/clerk-react";
+import { ClerkProvider, SignIn, useAuth } from "@clerk/clerk-react";
 import { ConvexProviderWithClerk } from "convex/react-clerk";
 import { FullScreenLoader } from "@/components/fullscreen-loader";
 
