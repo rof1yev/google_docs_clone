@@ -6,3 +6,9 @@ export interface ToolbarSectionItem {
   onClick: () => void;
   isActive?: boolean;
 }
+
+export interface ITemplate {
+  id: string;
+  label: string;
+  imageUrl: string;
+}
