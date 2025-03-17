@@ -15,6 +15,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Google Docs Clone",
   description: "Google Docs Clone built with Next.js and Tailwind CSS",
+  icons: [{ url: "/logo.svg", href: "/logo.svg" }],
 };
 
 export default function RootLayout({
