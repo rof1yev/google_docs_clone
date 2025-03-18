@@ -62,16 +62,18 @@ export const DocumentsTable = ({
         </Table>
       )}
 
-      <div className="flex items-center justify-center">
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={() => loadMore(5)}
-          disabled={status !== "CanLoadMore"}
-        >
-          {status === "CanLoadMore" ? "Load more" : "End of results"}
-        </Button>
-      </div>
+      {documents?.length !== 0 && (
+        <div className="flex items-center justify-center">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => loadMore(5)}
+            disabled={status !== "CanLoadMore"}
+          >
+            {status === "CanLoadMore" ? "Load more" : "End of results"}
+          </Button>
+        </div>
+      )}
     </div>
   );
 };
