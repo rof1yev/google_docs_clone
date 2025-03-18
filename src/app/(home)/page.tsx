@@ -9,16 +9,12 @@ import { useSearchParams } from "@/hooks/use-search-params";
 
 const Home = () => {
   const [search] = useSearchParams();
-  
+
   const { results, status, loadMore } = usePaginatedQuery(
     api.documents.getDocuments,
     { search },
     { initialNumItems: 5 }
   );
-
-  console.log(results);
-
-  if (!results) return <div>No documents found</div>;
 
   return (
     <div className="flex min-h-screen flex-col">

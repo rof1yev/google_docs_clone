@@ -26,7 +26,7 @@ import { FontSizeExtension } from "@/extensions/font-size";
 import { LineHightExtension } from "@/extensions/line-hight";
 import { useEditorStore } from "@/store/use-editor-store";
 import { Ruler } from "./ruler";
-import { Threads } from "../threads";
+import { Threads } from "./threads";
 
 export const Editor = () => {
   const { setEditor } = useEditorStore();
