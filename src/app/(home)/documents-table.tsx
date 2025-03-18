@@ -1,3 +1,5 @@
+"use client";
+
 import { PaginationStatus } from "convex/react";
 import { Doc } from "../../../convex/_generated/dataModel";
 import { LoaderIcon } from "lucide-react";
@@ -10,6 +12,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { DocumentRow } from "./document-row";
+import { Button } from "@/components/ui/button";
 
 interface DocumentsTableProps {
   documents: Doc<"documents">[] | undefined;
@@ -58,6 +61,17 @@ export const DocumentsTable = ({
           )}
         </Table>
       )}
+
+      <div className="flex items-center justify-center">
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => loadMore(5)}
+          disabled={status !== "CanLoadMore"}
+        >
+          {status === "CanLoadMore" ? "Load more" : "End of results"}
+        </Button>
+      </div>
     </div>
   );
 };
