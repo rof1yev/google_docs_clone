@@ -10,9 +10,22 @@ import {
 import { templates } from "@/constants";
 import { ITemplate } from "@/interface";
 import { cn } from "@/lib/utils";
+import { useMutation } from "convex/react";
+import { useRouter } from "nextjs-toploader/app";
+import { api } from "../../../convex/_generated/api";
+import { useState } from "react";
 
 export const TemplatesGallery = () => {
-  const isCreating: boolean = false;
+  const router = useRouter();
+  const create = useMutation(api.documents.createDocument);
+  const [isCreating, setIsCreating] = useState<boolean>(false);
+
+  const onTemplateClick = (title: string, initialContent: string) => {
+    setIsCreating(true);
+    create({ title, initialContent })
+      .then((documentId) => router.push(`/documents/${documentId}`))
+      .finally(() => setIsCreating(false));
+  };
 
   return (
     <div className="bg-[#f1f3f4]">
@@ -33,7 +46,7 @@ export const TemplatesGallery = () => {
                 >
                   <button
                     disabled={isCreating}
-                    onClick={() => {}}
+                    onClick={() => onTemplateClick(label, "")}
                     style={{
                       backgroundImage: `url(${imageUrl})`,
                       backgroundSize: "cover",
