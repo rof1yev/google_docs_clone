@@ -4,6 +4,7 @@ import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { ConvexClientProvider } from "@/providers/convex-client-provider";
 import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,6 +23,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className} suppressHydrationWarning>
         <NuqsAdapter>
+          <Toaster />
           <ConvexClientProvider>
             <NextTopLoader
               color="#3b82f6"

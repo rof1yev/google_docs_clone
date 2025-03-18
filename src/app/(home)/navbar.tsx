@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { SearchInput } from "./search-input";
-import { UserButton } from "@clerk/nextjs";
+import { UserButton, OrganizationSwitcher } from "@clerk/nextjs";
 
 export const Navbar = () => {
   return (
@@ -17,14 +17,26 @@ export const Navbar = () => {
 
       <SearchInput />
 
-      <UserButton
-        appearance={{
-          elements: {
-            userButtonAvatarBox: "size-[36px]",
-          },
-        }}
-      />
-      <div />
+      <div className="flex gap-3 items-center">
+        <OrganizationSwitcher
+          appearance={{
+            elements: {
+              button: "h-[36px]",
+            },
+          }}
+          afterCreateOrganizationUrl="/"
+          afterLeaveOrganizationUrl="/"
+          afterSelectOrganizationUrl="/"
+          afterSelectPersonalUrl="/"
+        />
+        <UserButton
+          appearance={{
+            elements: {
+              userButtonAvatarBox: "size-[36px]",
+            },
+          }}
+        />
+      </div>
     </nav>
   );
 };

@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, useState } from "react";
+import { ReactNode, useState, MouseEvent } from "react";
 import { Id } from "../../convex/_generated/dataModel";
 import {
   AlertDialog,
@@ -15,6 +15,7 @@ import {
 } from "./ui/alert-dialog";
 import { useMutation } from "convex/react";
 import { api } from "../../convex/_generated/api";
+import { useToast } from "@/hooks/use-toast";
 
 interface RemoveDialogProps {
   documentId: Id<"documents">;
@@ -24,6 +25,29 @@ interface RemoveDialogProps {
 export const RemoveDialog = ({ children, documentId }: RemoveDialogProps) => {
   const remove = useMutation(api.documents.removeById);
   const [isRemoving, setIsRemoving] = useState<boolean>(false);
+  
+  const { toast } = useToast();
+
+  const handleDelete = (e: MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    setIsRemoving(true);
+
+    remove({ id: documentId })
+      .then(() =>
+        toast({
+          title: "Successfully deleted!",
+          description: "The document was successfully deleted.",
+        })
+      )
+      .catch(() =>
+        toast({
+          variant: "destructive",
+          title: "Uh oh! Something went wrong.",
+          description: "There was a problem with your request.",
+        })
+      )
+      .finally(() => setIsRemoving(false));
+  };
 
   return (
     <AlertDialog>
@@ -37,16 +61,14 @@ export const RemoveDialog = ({ children, documentId }: RemoveDialogProps) => {
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel onClick={(e) => e.stopPropagation()}>
+          <AlertDialogCancel
+            onClick={(e: MouseEvent<HTMLButtonElement>) => e.stopPropagation()}
+          >
             Cancel
           </AlertDialogCancel>
           <AlertDialogAction
             disabled={isRemoving}
-            onClick={(e) => {
-              e.stopPropagation();
-              setIsRemoving(true);
-              remove({ id: documentId }).finally(() => setIsRemoving(false));
-            }}
+            onClick={handleDelete}
             className="bg-red-500 hover:bg-red-600"
           >
             Delete

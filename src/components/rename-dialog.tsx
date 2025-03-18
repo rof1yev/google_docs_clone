@@ -15,6 +15,7 @@ import { useMutation } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
+import { useToast } from "@/hooks/use-toast";
 
 interface RenameDialogProps {
   documentId: Id<"documents">;
@@ -33,15 +34,29 @@ export const RenameDialog = ({
   const [title, setTitle] = useState<string>(initialTitle);
   const [open, setOpen] = useState<boolean>(false);
 
+  const { toast } = useToast();
+
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsUpdating(true);
-    update({ id: documentId, title: title.trim() || "Untitled" }).finally(
-      () => {
+    update({ id: documentId, title: title.trim() || "Untitled" })
+      .then(() =>
+        toast({
+          title: "Successfully updated!",
+          description: "The document name was successfully updated.",
+        })
+      )
+      .catch(() =>
+        toast({
+          variant: "destructive",
+          title: "Uh oh! Something went wrong.",
+          description: "There was a problem with your request.",
+        })
+      )
+      .finally(() => {
         setOpen(false);
         setIsUpdating(false);
-      }
-    );
+      });
   };
 
   return (

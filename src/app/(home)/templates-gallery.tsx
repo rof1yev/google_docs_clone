@@ -14,16 +14,32 @@ import { useMutation } from "convex/react";
 import { useRouter } from "nextjs-toploader/app";
 import { api } from "../../../convex/_generated/api";
 import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
 
 export const TemplatesGallery = () => {
   const router = useRouter();
   const create = useMutation(api.documents.createDocument);
   const [isCreating, setIsCreating] = useState<boolean>(false);
 
+  const { toast } = useToast();
+
   const onTemplateClick = (title: string, initialContent: string) => {
     setIsCreating(true);
     create({ title, initialContent })
-      .then((documentId) => router.push(`/documents/${documentId}`))
+      .then((documentId) => {
+        router.push(`/documents/${documentId}`);
+        toast({
+          title: "Successfully created!",
+          description: "The document was successfully created.",
+        });
+      })
+      .catch(() =>
+        toast({
+          variant: "destructive",
+          title: "Uh oh! Something went wrong.",
+          description: "There was a problem with your request.",
+        })
+      )
       .finally(() => setIsCreating(false));
   };
 
