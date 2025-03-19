@@ -27,9 +27,14 @@ import { LineHightExtension } from "@/extensions/line-hight";
 import { useEditorStore } from "@/store/use-editor-store";
 import { Ruler } from "./ruler";
 import { Threads } from "./threads";
+import { useStorage } from "@liveblocks/react";
+import { LEFT_MARGIN, RIGHT_MARGIN } from "@/constants";
 
 export const Editor = () => {
   const { setEditor } = useEditorStore();
+  const leftMargin = useStorage((root) => root.leftMargin);
+  const rightMargin = useStorage((root) => root.rightMargin);
+
   const liveblocks = useLiveblocksExtension();
 
   const editor = useEditor({
@@ -44,7 +49,7 @@ export const Editor = () => {
     onContentError: ({ editor }) => setEditor(editor),
     editorProps: {
       attributes: {
-        style: "padding-right: 56px; padding-left: 56px;",
+        style: `padding-right: ${rightMargin ?? RIGHT_MARGIN}px; padding-left: ${leftMargin ?? LEFT_MARGIN}px;`,
         class:
           "focus:outline-none print:border-none bg-white border border-[#c7c7c7] flex flex-col min-h-[1054px] w-[816px] pt-10 pr-14 pb-10 cursor-text",
       },

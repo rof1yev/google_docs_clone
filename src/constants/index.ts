@@ -37,3 +37,6 @@ export const templates: ITemplate[] = [
     imageUrl: "/letter.svg",
   },
 ];
+
+export const LEFT_MARGIN: number = 56;
+export const RIGHT_MARGIN: number = 56;
