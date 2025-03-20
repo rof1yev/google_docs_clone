@@ -30,12 +30,19 @@ import { Threads } from "./threads";
 import { useStorage } from "@liveblocks/react";
 import { LEFT_MARGIN, RIGHT_MARGIN } from "@/constants";
 
-export const Editor = () => {
+interface EditorProps {
+  initialContent: string | undefined;
+}
+
+export const Editor = ({ initialContent }: EditorProps) => {
   const { setEditor } = useEditorStore();
   const leftMargin = useStorage((root) => root.leftMargin);
   const rightMargin = useStorage((root) => root.rightMargin);
 
-  const liveblocks = useLiveblocksExtension();
+  const liveblocks = useLiveblocksExtension({
+    initialContent,
+    offlineSupport_experimental: true,
+  });
 
   const editor = useEditor({
     immediatelyRender: false,

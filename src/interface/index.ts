@@ -11,4 +11,5 @@ export interface ITemplate {
   id: string;
   label: string;
   imageUrl: string;
+  initialContent: string;
 }
