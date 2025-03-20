@@ -14,14 +14,13 @@ import { useMutation } from "convex/react";
 import { useRouter } from "nextjs-toploader/app";
 import { api } from "../../../convex/_generated/api";
 import { useState } from "react";
-import { useToast } from "@/hooks/use-toast";
+import { toast } from "@/hooks/use-toast";
 
 export const TemplatesGallery = () => {
   const router = useRouter();
   const create = useMutation(api.documents.createDocument);
   const [isCreating, setIsCreating] = useState<boolean>(false);
 
-  const { toast } = useToast();
 
   const onTemplateClick = (title: string, initialContent: string) => {
     setIsCreating(true);

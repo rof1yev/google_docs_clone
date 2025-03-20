@@ -16,6 +16,7 @@ import {
 import { useMutation } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import { useToast } from "@/hooks/use-toast";
+import { useRouter } from "nextjs-toploader/app";
 
 interface RemoveDialogProps {
   documentId: Id<"documents">;
@@ -23,9 +24,10 @@ interface RemoveDialogProps {
 }
 
 export const RemoveDialog = ({ children, documentId }: RemoveDialogProps) => {
+  const router = useRouter();
   const remove = useMutation(api.documents.removeById);
   const [isRemoving, setIsRemoving] = useState<boolean>(false);
-  
+
   const { toast } = useToast();
 
   const handleDelete = (e: MouseEvent<HTMLButtonElement>) => {
@@ -33,12 +35,13 @@ export const RemoveDialog = ({ children, documentId }: RemoveDialogProps) => {
     setIsRemoving(true);
 
     remove({ id: documentId })
-      .then(() =>
+      .then(() => {
+        router.push("/");
         toast({
           title: "Successfully deleted!",
           description: "The document was successfully deleted.",
-        })
-      )
+        });
+      })
       .catch(() =>
         toast({
           variant: "destructive",
