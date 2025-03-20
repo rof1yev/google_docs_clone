@@ -299,17 +299,19 @@ export const Navbar = ({ data }: NavbarProps) => {
       <div className="flex gap-3 items-center">
         <Avatars />
         <Inbox />
-        <OrganizationSwitcher
-          appearance={{
-            elements: {
-              button: "h-[36px]",
-            },
-          }}
-          afterCreateOrganizationUrl="/"
-          afterLeaveOrganizationUrl="/"
-          afterSelectOrganizationUrl="/"
-          afterSelectPersonalUrl="/"
-        />
+        <div className="hidden md:inline-block">
+          <OrganizationSwitcher
+            appearance={{
+              elements: {
+                button: "h-[36px]",
+              },
+            }}
+            afterCreateOrganizationUrl="/"
+            afterLeaveOrganizationUrl="/"
+            afterSelectOrganizationUrl="/"
+            afterSelectPersonalUrl="/"
+          />
+        </div>
         <UserButton
           appearance={{
             elements: {
